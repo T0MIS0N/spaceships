@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://cls7xiub6mv16"]
+
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_6xyol"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_6xyol")
+
+[node name="Fullscreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="Fullscreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.5
+offset_top = 52.0
+offset_right = 149.5
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 56
+text = "Spaceships"
+
+[node name="PlayButton" type="Button" parent="Fullscreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -122.0
+offset_right = 117.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[connection signal="pressed" from="Fullscreen/PlayButton" to="." method="_on_play_button_pressed"]
