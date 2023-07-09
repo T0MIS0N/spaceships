@@ -3,14 +3,11 @@
 [ext_resource type="Script" path="res://Level/game_world.gd" id="1_fdoap"]
 [ext_resource type="PackedScene" uid="uid://3eysdd2bgood" path="res://Hazards/obstacle.tscn" id="3_fvi0o"]
 [ext_resource type="PackedScene" uid="uid://cixwy7uwti3f5" path="res://Level/boundary_posts.tscn" id="4_3yad7"]
-[ext_resource type="Shader" uid="uid://cirbhhslo41ce" path="res://Level/space_shader.tres" id="5_gecdu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wga8d"]
-render_priority = 0
-shader = ExtResource("5_gecdu")
+[ext_resource type="Material" uid="uid://bimcpfwbcmjvp" path="res://Level/space_material.tres" id="4_vvus5"]
+[ext_resource type="AudioStream" uid="uid://b5ly6g1mapyir" path="res://SoundFX/BackgroundMusic.ogg" id="5_i8njp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fpc1g"]
-material = SubResource("ShaderMaterial_wga8d")
+material = ExtResource("4_vvus5")
 flip_faces = true
 radius = 50.0
 height = 100.0
@@ -36,6 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 8.5)
 
 [node name="SpaceSphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("SphereMesh_fpc1g")
 
 [node name="SpaceEnvironment" type="WorldEnvironment" parent="."]
@@ -47,3 +45,10 @@ environment = SubResource("Environment_03b44")
 
 [node name="Hazards" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08078, -0.361992, -0.293312)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i8njp")
+autoplay = true

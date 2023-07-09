@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bimcpfwbcmjvp"]
+
+[ext_resource type="Shader" uid="uid://cirbhhslo41ce" path="res://Level/space_shader.tres" id="1_dnynt"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dnynt")

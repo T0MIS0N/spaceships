@@ -32,7 +32,7 @@ op_type = 2
 
 [sub_resource type="Gradient" id="Gradient_ng1ym"]
 offsets = PackedFloat32Array(0.655738, 1)
-colors = PackedColorArray(0.059046, 0.0436732, 0.126621, 1, 0.842281, 0.484664, 0.824303, 1)
+colors = PackedColorArray(0.0189104, 0.0133477, 0.0557792, 1, 0.530743, 0.189216, 0.521004, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_medhh"]
 fractal_lacunarity = 3.0
@@ -90,7 +90,7 @@ input_name = "time"
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
 
 uniform sampler2D tex_frg_2;
 uniform sampler2D tex_frg_5;
@@ -157,6 +157,8 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-697.942, 389.942)
+flags/unshaded = true
 nodes/fragment/0/position = Vector2(560, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_6jsxu")
 nodes/fragment/2/position = Vector2(-60, 120)
