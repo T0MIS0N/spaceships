@@ -1,9 +1,9 @@
 extends Node3D
 
-var laser = preload("res://Spaceship/laser.tscn")
-var spaceship = preload("res://Spaceship/spaceship.tscn")
-var asteroid = preload("res://Hazards/asteroid.tscn")
-var bomb = preload("res://Hazards/bomb.tscn")
+var laser = load("res://Spaceship/laser.tscn")
+var spaceship = load("res://Spaceship/spaceship.tscn")
+var asteroid = load("res://Hazards/asteroid.tscn")
+var bomb = load("res://Hazards/bomb.tscn")
 var spawn_on_left = true
 var mouse_position : Vector3
 var score = 0

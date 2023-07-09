@@ -15,3 +15,10 @@ func change_scene(new_scene : String):
 	await loading_anim.animation_finished
 	get_tree().change_scene_to_file(new_scene)
 	loading_anim.play_backwards("dissolve")
+
+
+func change_packed_scene(new_scene : PackedScene):
+	loading_anim.play("dissolve")
+	await loading_anim.animation_finished
+	get_tree().change_scene_to_packed(new_scene)
+	loading_anim.play_backwards("dissolve")
