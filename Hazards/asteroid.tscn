@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfh4c483opfeb"]
+
+[ext_resource type="Script" path="res://Hazards/asteroid.gd" id="1_q3is3"]
+[ext_resource type="PackedScene" uid="uid://kmj76snb6ivd" path="res://Hazards/asteroid.glb" id="1_qdppc"]
+[ext_resource type="Material" uid="uid://dh6ydcia3w138" path="res://Hazards/asteroid_material.tres" id="2_t6eyf"]
+[ext_resource type="AudioStream" uid="uid://pyyerujoxx22" path="res://SoundFX/RockSmash1.ogg" id="4_4cmwi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iawaa"]
+radius = 1.3
+
+[node name="Asteroid" type="CharacterBody3D"]
+script = ExtResource("1_q3is3")
+
+[node name="asteroid" parent="." instance=ExtResource("1_qdppc")]
+
+[node name="Asteroid" parent="asteroid" index="0"]
+surface_material_override/0 = ExtResource("2_t6eyf")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_iawaa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4cmwi")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+
+[editable path="asteroid"]

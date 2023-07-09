@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal fire_projectile(direction, position)
+signal death()
 
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 4.5
@@ -66,3 +67,8 @@ func spawn_projectile(direction):
 
 func _on_timer_timeout():
 	can_fire = true
+
+
+func _on_hitbox_area_entered(area):
+	emit_signal("death")
+	queue_free()
