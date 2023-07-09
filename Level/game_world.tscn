@@ -44,3 +44,6 @@ environment = SubResource("Environment_03b44")
 [node name="Projectiles" type="Node3D" parent="."]
 
 [node name="Spaceships" type="Node3D" parent="."]
+
+[node name="Hazards" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08078, -0.361992, -0.293312)

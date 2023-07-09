@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dh6ydcia3w138"]
+
+[ext_resource type="Shader" uid="uid://evx8dytqcrbk" path="res://Hazards/asteroid_rock.tres" id="1_xa4b7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xa4b7")

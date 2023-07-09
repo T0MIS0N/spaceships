@@ -23,13 +23,11 @@ func _physics_process(delta):
 		spawn_projectile(collider_direction)
 		can_fire = false
 		timer.start()
-#	mesh.look_at(velocity,Vector3.UP,false)
 	if target == null:
 		velocity.x = move_toward(velocity.x, 0, friction)
 		velocity.z = move_toward(velocity.z, 0, friction)
 		move_and_slide()
 		return
-	
 	var direction = -(position.direction_to(target.position).normalized())
 	if direction:
 		velocity.x = move_toward(direction.x * SPEED, SPEED, acceleration) 

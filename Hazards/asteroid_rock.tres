@@ -1,0 +1,39 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://evx8dytqcrbk"]
+
+[sub_resource type="Gradient" id="Gradient_xshaw"]
+offsets = PackedFloat32Array(0, 0.725191)
+colors = PackedColorArray(0.263717, 0.156858, 0.0130964, 1, 0.555947, 0.235107, 3.85046e-07, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_00upj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n2k0i"]
+seamless = true
+color_ramp = SubResource("Gradient_xshaw")
+noise = SubResource("FastNoiseLite_00upj")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_swcil"]
+texture = SubResource("NoiseTexture2D_n2k0i")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	NORMAL = vec3(n_out2p0.xyz);
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_swcil")
+nodes/fragment/2/position = Vector2(20, 180)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 2, 0, 0, 8)
