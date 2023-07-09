@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed = 5.0
+@export var speed = 7.0
 @export var direction : Vector3
 
 
@@ -12,4 +12,8 @@ func _physics_process(delta):
 
 
 func _on_timer_timeout():
+	queue_free()
+
+
+func _on_area_3d_area_entered(area):
 	queue_free()

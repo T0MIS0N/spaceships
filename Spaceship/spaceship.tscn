@@ -37,7 +37,7 @@ collide_with_areas = true
 
 [node name="Hitbox" type="Area3D" parent="spaceship"]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="ShipCollision" type="CollisionShape3D" parent="spaceship/Hitbox"]
 shape = SubResource("ConvexPolygonShape3D_jlvmb")
@@ -61,6 +61,7 @@ stream = ExtResource("3_8xwgv")
 
 [connection signal="area_entered" from="TargetArea" to="." method="_on_target_area_area_entered"]
 [connection signal="area_exited" from="TargetArea" to="." method="_on_target_area_area_exited"]
+[connection signal="area_entered" from="spaceship/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="spaceship"]

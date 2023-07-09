@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://furwyjwciuwj"]
+[gd_scene load_steps=7 format=3 uid="uid://furwyjwciuwj"]
 
 [ext_resource type="Script" path="res://Level/game_world.gd" id="1_fdoap"]
-[ext_resource type="PackedScene" uid="uid://3eysdd2bgood" path="res://Hazards/obstacle.tscn" id="3_fvi0o"]
 [ext_resource type="PackedScene" uid="uid://cixwy7uwti3f5" path="res://Level/boundary_posts.tscn" id="4_3yad7"]
 [ext_resource type="Material" uid="uid://bimcpfwbcmjvp" path="res://Level/space_material.tres" id="4_vvus5"]
 [ext_resource type="AudioStream" uid="uid://b5ly6g1mapyir" path="res://SoundFX/BackgroundMusic.ogg" id="5_i8njp"]
@@ -22,14 +21,13 @@ script = ExtResource("1_fdoap")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
-[node name="Obstacle" parent="." instance=ExtResource("3_fvi0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
-
 [node name="TopLeftPost" parent="." instance=ExtResource("4_3yad7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8.5)
+visible = false
 
 [node name="BottomRightPost" parent="." instance=ExtResource("4_3yad7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 8.5)
+visible = false
 
 [node name="SpaceSphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -52,3 +50,100 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_i8njp")
 autoplay = true
+
+[node name="SpawnerLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+
+[node name="SpawnerRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="ShipTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="Bombs" type="Node3D" parent="."]
+
+[node name="GameUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_top = 34.0
+offset_right = -79.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "Score : 0"
+
+[node name="TutorialPanel" type="Panel" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -207.5
+offset_top = -271.0
+offset_right = 207.5
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GameUI/TutorialPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = 18.0
+offset_right = 164.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Score by destroying the spaceship 
+with asteroids."
+
+[node name="Label3" type="Label" parent="GameUI/TutorialPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = 92.0
+offset_right = 164.0
+offset_bottom = 154.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Move asteroids by clicking 
+near them!"
+
+[node name="Label2" type="Label" parent="GameUI/TutorialPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.5
+offset_top = -37.0
+offset_right = 87.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space to Dismiss"
+
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShipTimer" to="." method="_on_ship_timer_timeout"]

@@ -30,10 +30,12 @@ void fragment() {
 // Output:0
 	ALBEDO = vec3(n_out2p0.xyz);
 	NORMAL = vec3(n_out2p0.xyz);
+	NORMAL_MAP_DEPTH = n_out2p0.x;
 
 
 }
 "
+graph_offset = Vector2(0, 233.883)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_swcil")
 nodes/fragment/2/position = Vector2(20, 180)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 2, 0, 0, 8)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 2, 0, 0, 8, 2, 0, 0, 10)

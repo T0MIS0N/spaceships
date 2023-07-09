@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://6decyjrd1jra"]
+
+[ext_resource type="AudioStream" uid="uid://dougawsx4tkrj" path="res://SoundFX/RockSmash2.ogg" id="1_1i8p4"]
+[ext_resource type="Script" path="res://Hazards/bomb.gd" id="1_afx6k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rp843"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.337167, 0.187868, 1, 0.294118)
+
+[sub_resource type="SphereMesh" id="SphereMesh_q88mg"]
+material = SubResource("StandardMaterial3D_rp843")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uvvce"]
+radius = 2.0
+
+[node name="Bomb" type="Node3D"]
+script = ExtResource("1_afx6k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_q88mg")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_uvvce")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_1i8p4")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
