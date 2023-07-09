@@ -6,6 +6,7 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var thread = Thread.new()
 	ship_anim.play("spin")
 
 

@@ -1,21 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6h6ludy3icyj"]
+[gd_scene load_steps=6 format=3 uid="uid://c6h6ludy3icyj"]
 
 [ext_resource type="Script" path="res://Spaceship/spaceship.gd" id="1_potsk"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ee7fw"]
+[ext_resource type="PackedScene" uid="uid://by2moankp33wp" path="res://Spaceship/spaceship.glb" id="2_r3j50"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_t4h2w"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nub4b"]
 radius = 3.0
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jlvmb"]
+points = PackedVector3Array(2.14569, 0.536777, -0.350419, -0.682637, 0.146367, -1.8137, -0.0971704, 0.439081, 3.74667, -0.083443, 1.12983, -0.268698, 3.12168, 0.439081, -2.10648, 0.500797, 0.0423588, 1.3205, -3.12168, 0.439081, -2.10648, -0.389904, 1.12183, 0.527897, 0.389904, 1.12183, 0.527897, -0.583941, 0.0429015, 1.15337, 0.539867, 0, -0.980696, -2.73116, 0.243938, -1.71573, 3.12168, 0.341634, -1.9111, 0.194952, 0.536777, 3.4539, -0.584856, 0.633852, -1.8137, -0.539867, 0, -0.980696, 0.172252, 0.283687, 3.14722, -0.584856, 0.731547, 1.99004, 2.73116, 0.243938, -1.9111, -3.12168, 0.439081, -1.9111, -0.172252, 0.283687, 3.14722, -3.02389, 0.341634, -1.71573, -0.194952, 0.536777, 3.4539, 0.0971704, 0.439081, 3.74667, 3.12168, 0.439081, -1.9111, 0.584856, 0.633852, -1.8137, 0.584856, 0.731547, 1.99004, -2.73116, 0.243938, -1.9111, 0.167675, 1.13068, -0.186642, 0.682637, 0.146367, -1.8137, -0.500797, 0.0423588, 1.3205, 2.73116, 0.243938, -1.71573)
+
 [node name="Spaceship" type="CharacterBody3D"]
 script = ExtResource("1_potsk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_ee7fw")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_t4h2w")
 
 [node name="TargetArea" type="Area3D" parent="."]
@@ -25,5 +25,38 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetArea"]
 shape = SubResource("CylinderShape3D_nub4b")
 
+[node name="spaceship" parent="." instance=ExtResource("2_r3j50")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Fireray" type="RayCast3D" parent="spaceship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.138104, -0.204775, 0.0322533)
+target_position = Vector3(0, 0, 30)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Hitbox" type="Area3D" parent="spaceship"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="ShipCollision" type="CollisionShape3D" parent="spaceship/Hitbox"]
+shape = SubResource("ConvexPolygonShape3D_jlvmb")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343682, 0.194673)
+light_color = Color(0.258824, 0.709804, 0.835294, 1)
+light_energy = 2.0
+omni_range = 1.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0615829, -0.44667)
+light_color = Color(1, 0.564706, 0.2, 1)
+omni_range = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="TargetArea" to="." method="_on_target_area_area_entered"]
 [connection signal="area_exited" from="TargetArea" to="." method="_on_target_area_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="spaceship"]

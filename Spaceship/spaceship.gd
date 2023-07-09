@@ -1,15 +1,29 @@
 extends CharacterBody3D
 
+signal fire_projectile(direction, position)
+
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 4.5
 @export var acceleration = 0.1
-@export var friction = 0.01
+@export var friction = 0.04
 @export var target : Node3D
 
+var can_fire = true
+
 @onready var target_area = $TargetArea
+@onready var mesh = $spaceship
+@onready var fireray = $spaceship/Fireray
+@onready var timer = $Timer
 
 
 func _physics_process(delta):
+	if fireray.is_colliding() and can_fire:
+		var collide_point = fireray.get_collision_point()
+		var collider_direction = global_position.direction_to(collide_point).normalized()
+		spawn_projectile(collider_direction)
+		can_fire = false
+		timer.start()
+#	mesh.look_at(velocity,Vector3.UP,false)
 	if target == null:
 		velocity.x = move_toward(velocity.x, 0, friction)
 		velocity.z = move_toward(velocity.z, 0, friction)
@@ -20,6 +34,7 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = move_toward(direction.x * SPEED, SPEED, acceleration) 
 		velocity.z = move_toward(direction.z * SPEED, SPEED, acceleration)
+		mesh.rotation.y = Vector2(velocity.x, -velocity.z).angle() + deg_to_rad(90)
 	
 	move_and_slide()
 
@@ -42,3 +57,12 @@ func change_target():
 		if overlap_area.position.distance_to(position) < new_target.position.distance_to(position):
 			new_target = overlap_area.get_parent_node_3d()
 	target = new_target
+
+
+func spawn_projectile(direction):
+	print("FIRE PROJECTILE")
+	emit_signal("fire_projectile", direction, global_position)
+
+
+func _on_timer_timeout():
+	can_fire = true
