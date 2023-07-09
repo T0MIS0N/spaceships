@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://3eysdd2bgood"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yhf0"]
+albedo_color = Color(0.760784, 0, 0.188235, 1)
+emission_enabled = true
+emission = Color(0.780392, 0, 0.176471, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g42mt"]
+material = SubResource("StandardMaterial3D_1yhf0")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s57fv"]
+
+[node name="Obstacle" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_g42mt")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_s57fv")

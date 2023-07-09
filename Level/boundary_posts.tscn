@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixwy7uwti3f5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7gjyt"]
+
+[node name="BoundaryPosts" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_7gjyt")
