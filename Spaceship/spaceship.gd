@@ -14,6 +14,7 @@ var can_fire = true
 @onready var mesh = $spaceship
 @onready var fireray = $spaceship/Fireray
 @onready var timer = $Timer
+@onready var laser_sfx = $LaserGunSFX
 
 
 func _physics_process(delta):
@@ -58,8 +59,9 @@ func change_target():
 
 
 func spawn_projectile(direction):
-	print("FIRE PROJECTILE")
+#	print("FIRE PROJECTILE")
 	emit_signal("fire_projectile", direction, global_position)
+	laser_sfx.play()
 
 
 func _on_timer_timeout():

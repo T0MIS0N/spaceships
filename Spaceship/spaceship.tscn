@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6h6ludy3icyj"]
+[gd_scene load_steps=7 format=3 uid="uid://c6h6ludy3icyj"]
 
 [ext_resource type="Script" path="res://Spaceship/spaceship.gd" id="1_potsk"]
 [ext_resource type="PackedScene" uid="uid://by2moankp33wp" path="res://Spaceship/spaceship.glb" id="2_r3j50"]
+[ext_resource type="AudioStream" uid="uid://cs6nksra00ds1" path="res://SoundFX/LaserGun.ogg" id="3_8xwgv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_t4h2w"]
 
@@ -54,6 +55,9 @@ omni_range = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="LaserGunSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8xwgv")
 
 [connection signal="area_entered" from="TargetArea" to="." method="_on_target_area_area_entered"]
 [connection signal="area_exited" from="TargetArea" to="." method="_on_target_area_area_exited"]

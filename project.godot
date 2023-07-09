@@ -24,6 +24,7 @@ SceneTransition="*res://UI/scene_transition.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [layer_names]
 
